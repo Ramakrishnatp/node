@@ -5,6 +5,10 @@
   "scripts": {
     "start": "node ./bin/www"
   },
+  "engines" : { 
+    "node" : ">=6.9.3",
+    "npm" : "~2.15.9" 	
+    },
   "dependencies": {
     "@azure/event-hubs": "^1.0.6",
     "azure-iot-device": "^1.7.4",
