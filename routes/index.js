@@ -9,30 +9,11 @@ var iothub = require('azure-iothub');
 var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=tH5hEGYfilY5Owg/8OOLpBUcSzdVrlbKlRUdPEUgP5U=';
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  var sql = require("mssql");
+ 
 
   // config for your database
-  var config = {
-    user: 'zylfiadmin',
-    password: 'test1234!',
-    server: 'zylfiserver.database.windows.net',
-    database: 'zylfi',
-    options: {
-      encrypt: true
-    }
-  };
-  sql.connect(config, function (err) {
-    if (err) console.log(err);
-    // create Request object
-    var request = new sql.Request();
-    // query to the database and get the records
-    request.query('select * from Device', function (err, recordset) {
-      if (err) console.log(err)
-      // send records as a response
-      //console.log(recordset);
-      //res.send(recordset);
-    });
-  });
+
+  
   res.render('index', { title: 'Express' });
 });
 
