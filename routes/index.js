@@ -9,11 +9,11 @@ var iothub = require('azure-iothub');
 var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=tH5hEGYfilY5Owg/8OOLpBUcSzdVrlbKlRUdPEUgP5U=';
 /* GET home page. */
 router.get('/', function (req, res, next) {
- 
+
 
   // config for your database
 
-  
+
   res.render('index', { title: 'Express' });
 });
 
@@ -86,14 +86,14 @@ router.get('/iotHUBSend', function (req, res, next) {
   var Client = require('azure-iothub').Client;
   var Message = require('azure-iot-common').Message;
   var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=tH5hEGYfilY5Owg/8OOLpBUcSzdVrlbKlRUdPEUgP5U=';
-  var targetDevice = '12';
+  var targetDevice = 'DV19000108';
   var client = Client.fromConnectionString(connectionString);
   client.open(function (err) {
     if (err) {
       console.error('Could not connect: ' + err.message);
     } else {
       console.log('Client connected');
-      var data = JSON.stringify(1);
+      var data = JSON.stringify(1123);
       var message = new Message(data);
       console.log('Sending message: ' + message.getData());
       client.send(targetDevice, message, printResultFor('send'));
@@ -112,37 +112,45 @@ router.get('/iotHUBSend', function (req, res, next) {
   }
 });
 
-router.get('/iotHUBOn', function (req, res, next) {
+router.post('/iotHUBOn', function (req, res, next) {
+  console.log(req.body);
   var Client = require('azure-iothub').Client;
   var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=tH5hEGYfilY5Owg/8OOLpBUcSzdVrlbKlRUdPEUgP5U=';
-  var targetDevice = '12';
+  var targetDevice = req.body.DeviceId;
   var methodParams = {
-    methodName: 'deviceOn',
-    payload: '1',
+    methodName: 'AzureIoTC2DMethod',
+    payload: {
+      "DeviceId": req.body.DeviceId,
+      "ChannelNo": req.body.ChannelNo,
+      "On_Off": req.body.On_Off,
+      "ApplianceType": req.body.ApplianceType
+    },
     responseTimeoutInSeconds: 15 // set response timeout as 15 seconds 
   };
-  var methodParams1 = {
-    methodName: 'deviceOff',
-    payload: '1',
-    responseTimeoutInSeconds: 15 // set response timeout as 15 seconds 
-  };
+  // var methodParams1 = {
+  //   methodName: 'deviceOff',
+  //   payload: '1',
+  //   responseTimeoutInSeconds: 15 // set response timeout as 15 seconds 
+  // };
   var client = Client.fromConnectionString(connectionString);
   client.invokeDeviceMethod(targetDevice, methodParams, function (err, result) {
     if (err) {
       console.error('Failed to invoke method \'' + methodParams.methodName + '\': ' + err.message);
+      res.send(500);
     } else {
       console.log(methodParams.methodName + ' on ' + targetDevice + ':');
+      res.json(result);
       console.log(JSON.stringify(result, null, 2));
     }
   });
-  client.invokeDeviceMethod(targetDevice, methodParams1, function (err, result) {
-    if (err) {
-      console.error('Failed to invoke method \'' + methodParams.methodName + '\': ' + err.message);
-    } else {
-      console.log(methodParams.methodName + ' on ' + targetDevice + ':');
-      console.log(JSON.stringify(result, null, 2));
-    }
-  });
+  // client.invokeDeviceMethod(targetDevice, methodParams1, function (err, result) {
+  //   if (err) {
+  //     console.error('Failed to invoke method \'' + methodParams.methodName + '\': ' + err.message);
+  //   } else {
+  //     console.log(methodParams.methodName + ' on ' + targetDevice + ':');
+  //     console.log(JSON.stringify(result, null, 2));
+  //   }
+  // });
 });
 router.get('/iotHUBReadData', function (req, res, next) {
   var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=service;SharedAccessKey=zgRCdOQw8bhgazr96iaDgzFoX35dhwsmMXEqLTKgAps=';
