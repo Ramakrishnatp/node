@@ -6,7 +6,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var iothub = require('azure-iothub');
 
-var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=tH5hEGYfilY5Owg/8OOLpBUcSzdVrlbKlRUdPEUgP5U=';
+const connectionString = 'HostName=ZylfiTest.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=PEJIiGJ9gpw3koHfw8FLQQ9UHIHXdUGJoBtTVT3/u14=';
 /* GET home page. */
 router.get('/', function (req, res, next) {
 
@@ -27,7 +27,7 @@ io.on('connection', function (socket) {
 
 router.get('/iotHUB', function (req, res, next) {
   var iothub = require('azure-iothub');
-  var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=tH5hEGYfilY5Owg/8OOLpBUcSzdVrlbKlRUdPEUgP5U=';
+  
   var registry = iothub.Registry.fromConnectionString(connectionString);
   registry.list((err, deviceList) => {
     // deviceList.forEach((device) => {
@@ -41,7 +41,7 @@ router.get('/iotHUB', function (req, res, next) {
 router.get('/iotHUBSingleDevice', function (req, res, next) {
   var deviceId = 12;
   var iothub = require('azure-iothub');
-  var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=tH5hEGYfilY5Owg/8OOLpBUcSzdVrlbKlRUdPEUgP5U=';
+ // var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=tH5hEGYfilY5Owg/8OOLpBUcSzdVrlbKlRUdPEUgP5U=';
   var registry = iothub.Registry.fromConnectionString(connectionString);
   registry.get(deviceId, printResult);
 
@@ -85,7 +85,7 @@ router.get('/addSingleDevice', function (req, res, next) {
 router.get('/iotHUBSend', function (req, res, next) {
   var Client = require('azure-iothub').Client;
   var Message = require('azure-iot-common').Message;
-  var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=tH5hEGYfilY5Owg/8OOLpBUcSzdVrlbKlRUdPEUgP5U=';
+  //var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=tH5hEGYfilY5Owg/8OOLpBUcSzdVrlbKlRUdPEUgP5U=';
   var targetDevice = 'DV19000108';
   var client = Client.fromConnectionString(connectionString);
   client.open(function (err) {
@@ -115,7 +115,7 @@ router.get('/iotHUBSend', function (req, res, next) {
 router.post('/iotHUBOn', function (req, res, next) {
   console.log(req.body);
   var Client = require('azure-iothub').Client;
-  var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=tH5hEGYfilY5Owg/8OOLpBUcSzdVrlbKlRUdPEUgP5U=';
+  //var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=tH5hEGYfilY5Owg/8OOLpBUcSzdVrlbKlRUdPEUgP5U=';
   var targetDevice = req.body.DeviceId;
   var methodParams = {
     methodName: 'AzureIoTC2DMethod',
@@ -153,7 +153,7 @@ router.post('/iotHUBOn', function (req, res, next) {
   // });
 });
 router.get('/iotHUBReadData', function (req, res, next) {
-  var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=service;SharedAccessKey=zgRCdOQw8bhgazr96iaDgzFoX35dhwsmMXEqLTKgAps=';
+  //var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=service;SharedAccessKey=zgRCdOQw8bhgazr96iaDgzFoX35dhwsmMXEqLTKgAps=';
   // Using the Node.js SDK for Azure Event hubs:
   //   https://github.com/Azure/azure-event-hubs-node
   // The sample connects to an IoT hub's Event Hubs-compatible endpoint
@@ -190,7 +190,7 @@ router.get('/iotHUBReadData', function (req, res, next) {
 
 router.get('/iotHUBD', function (req, res, next) {
   var Client = require('azure-iothub').Client;
-  var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=tH5hEGYfilY5Owg/8OOLpBUcSzdVrlbKlRUdPEUgP5U=;DeviceId=12';
+  //var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=tH5hEGYfilY5Owg/8OOLpBUcSzdVrlbKlRUdPEUgP5U=;DeviceId=12';
   var Protocol = require('azure-iot-device-mqtt').Mqtt;
   var Client = require('azure-iot-device').Client;
   var Message = require('azure-iot-device').Message;
