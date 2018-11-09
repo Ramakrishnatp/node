@@ -27,7 +27,7 @@ io.on('connection', function (socket) {
 
 router.get('/iotHUB', function (req, res, next) {
   var iothub = require('azure-iothub');
-  
+
   var registry = iothub.Registry.fromConnectionString(connectionString);
   registry.list((err, deviceList) => {
     // deviceList.forEach((device) => {
@@ -41,7 +41,7 @@ router.get('/iotHUB', function (req, res, next) {
 router.get('/iotHUBSingleDevice', function (req, res, next) {
   var deviceId = 12;
   var iothub = require('azure-iothub');
- // var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=tH5hEGYfilY5Owg/8OOLpBUcSzdVrlbKlRUdPEUgP5U=';
+  // var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=tH5hEGYfilY5Owg/8OOLpBUcSzdVrlbKlRUdPEUgP5U=';
   var registry = iothub.Registry.fromConnectionString(connectionString);
   registry.get(deviceId, printResult);
 
@@ -123,7 +123,10 @@ router.post('/iotHUBOn', function (req, res, next) {
       "DeviceId": req.body.DeviceId,
       "ChannelNo": req.body.ChannelNo,
       "On_Off": req.body.On_Off,
-      "ApplianceType": req.body.ApplianceType
+      "ApplianceType": req.body.ApplianceType,
+      "temp": req.body.temp+"",
+      "decTemp": req.body.decTemp + "",
+      "incTemp": req.body.incTemp + "",
     },
     responseTimeoutInSeconds: 15 // set response timeout as 15 seconds 
   };
