@@ -6,7 +6,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var iothub = require('azure-iothub');
 
-const connectionString = 'HostName=ZylfiTest.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=PEJIiGJ9gpw3koHfw8FLQQ9UHIHXdUGJoBtTVT3/u14=';
+const connectionString = 'HostName=ZylfiTP.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=Ysb4XbxLdwHKgf52J9hqlgh4KGlzdMgU6wTlFle4lYs=';
 /* GET home page. */
 router.get('/', function (req, res, next) {
 
