@@ -124,9 +124,9 @@ router.post('/iotHUBOn', function (req, res, next) {
       "ChannelNo": req.body.ChannelNo,
       "On_Off": req.body.On_Off,
       "ApplianceType": req.body.ApplianceType,
-      "temp": req.body.temp+"",
-      "decTemp": req.body.decTemp + "",
-      "incTemp": req.body.incTemp + "",
+      // "temp": req.body.temp+"",
+      // "decTemp": req.body.decTemp + "",
+      // "incTemp": req.body.incTemp + "",
     },
     responseTimeoutInSeconds: 15 // set response timeout as 15 seconds 
   };
