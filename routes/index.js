@@ -6,7 +6,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var iothub = require('azure-iothub');
 
-const connectionString = 'HostName=ZylfiTP.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=Ysb4XbxLdwHKgf52J9hqlgh4KGlzdMgU6wTlFle4lYs=';
+const connectionString = 'HostName=IOT-HIMALAYA-HUB.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=jWJSd0hNqBj3FqGMlZY5a8OXd2WkVjLHkUWIm8q8Ad8=';
 /* GET home page. */
 router.get('/', function (req, res, next) {
 
@@ -86,7 +86,7 @@ router.get('/iotHUBSend', function (req, res, next) {
   var Client = require('azure-iothub').Client;
   var Message = require('azure-iot-common').Message;
   //var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=tH5hEGYfilY5Owg/8OOLpBUcSzdVrlbKlRUdPEUgP5U=';
-  var targetDevice = 'DV19000108';
+  var targetDevice = 'DV19000124';
   var client = Client.fromConnectionString(connectionString);
   client.open(function (err) {
     if (err) {
@@ -115,6 +115,7 @@ router.get('/iotHUBSend', function (req, res, next) {
 router.post('/iotHUBOn', function (req, res, next) {
   console.log(req.body);
   var Client = require('azure-iothub').Client;
+  console.log(connectionString);
   //var connectionString = 'HostName=ZYLFI.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=tH5hEGYfilY5Owg/8OOLpBUcSzdVrlbKlRUdPEUgP5U=';
   var targetDevice = req.body.DeviceId;
   var methodParams = {
